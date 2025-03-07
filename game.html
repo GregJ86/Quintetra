@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quintetra.gg</title>
+    <link rel="stylesheet" href="cardgame.css">
+
+</head>
+
+<body>
+
+    <h1 id="title">Quintetra</h1>
+    <div class='window'>
+        
+        <div class='table'>
+
+            <div class="bonus" >
+                <div class = "bonusCards">
+                    <div id="bonus0" class="bonusZone">
+                        <img src="./cards/BACK.png">
+                    </div>
+                    <div id="bonus1" class="bonusZone">
+                        <img src="./cards/BACK.png">
+                    </div>
+                    <div id="bonus2" class="bonusZone">
+                        <img src="./cards/BACK.png">
+                    </div>
+                    <div id="bonus3" class="bonusZone">
+                        <img src="./cards/BACK.png">
+                    </div>
+                    <div id="bonus4" class="bonusZone">
+                        <img src="./cards/BACK.png">
+                    </div>
+                </div>
+
+                <div class = "bonusButtons">
+                    <button id="bonusButton"> back to game</button>
+                    <input type = "number" id = "wager" min = "0">
+                    <button id="wagerButton">wager gold</button>
+               
+                </div>
+                
+            </div>
+
+            <div class="topGrid">
+                <div id="deck">
+                    <img src="./cards/BACK.png" alt="deck of cards">
+                </div>
+
+                <div id="dropZones">
+                    <div id="play0" class="dropZone">
+                    </div>
+                    <div id="play1" class="dropZone">
+                    </div>
+                    <div id="play2" class="dropZone">
+                    </div>
+                    <div id="play3" class="dropZone">
+                    </div>
+                    <div id="play4" class="dropZone">
+                    </div>
+                    <div id="score">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class = "buttons">
+            <button id="button">meld cards</button>
+            <button id ="reset">reset cards</button>
+            </div>
+
+
+            <div class="bottomGrid">
+                <div id="discard">
+                    <img src="./cards/J-Z.png" alt="discard zone">
+                </div>
+
+                <div id="hand">
+
+                    <div id="card0" class="card" draggable="true">
+                    </div>
+                    <div id="card1" class="card" draggable="true">
+                    </div>
+                    <div id="card2" class="card" draggable="true">
+                    </div>
+                    <div id="card3" class="card" draggable="true">
+                    </div>
+                    <div id="card4" class="card" draggable="true">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="animations.js"></script>
+<script src="gameLogic.js"></script>
+<script src="cardgame.js"></script>
+
+</html>
