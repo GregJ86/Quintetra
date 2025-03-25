@@ -1,15 +1,19 @@
 var deck = [];
 var hand = [];
 var playedCard = [];
+var bonusDeck = [];
+var bonusHand = [];
 var points = 0;
 
 const cards = document.querySelectorAll('.card');
 const dropZones = document.querySelectorAll('.dropZone');
+const bonusZones = document.querySelectorAll('.bonusZone');
 const deckElement = document.getElementById("deck");
 const scoreButton = document.getElementById("button");
 const resetButton = document.getElementById("reset");
 const bonusButton = document.getElementById("bonusButton");
 const bonus = document.querySelector('.bonus');
+const wagerButton = document.getElementById("wagerButton");
 const discardZone = document.getElementById("discard");
 const totalScore = document.getElementById("score");
 const wagerInput = document.getElementById('wager');
@@ -30,59 +34,59 @@ window.onload = function () {
 }
 
 ///////////////////////////////////////////////////////////
-function initializeDragDropEvents(){
-cards.forEach((card, index) => {
-    card.addEventListener('dragstart', (e) => {
-        let cardValue = hand[index];
-        e.dataTransfer.setData('text', card.id);
-        e.dataTransfer.setData('handValue', cardValue);
-        console.log("Dragging card:", cardValue);
-    });
-});
-
-dropZones.forEach(dropZone => {
-    dropZone.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        dropZone.classList.add('dragover');
+function initializeDragDropEvents() {
+    cards.forEach((card, index) => {
+        card.addEventListener('dragstart', (e) => {
+            let cardValue = hand[index];
+            e.dataTransfer.setData('text', card.id);
+            e.dataTransfer.setData('handValue', cardValue);
+            console.log("Dragging card:", cardValue);
+        });
     });
 
-    dropZone.addEventListener('dragleave', function() {
-        dropZone.classList.remove('dragover');  
+    dropZones.forEach(dropZone => {
+        dropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', function () {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+            e.preventDefault();
+
+            dropZone.classList.remove('dragover');
+            const dropId = e.dataTransfer.getData("text");
+            const drop = document.getElementById(dropId);
+            const cardValue = e.dataTransfer.getData('handValue');
+            const cardSlot = drop;
+
+            if (!cardSlot) return;
+
+            const cardImage = cardSlot.querySelector("img");
+            if (cardImage) {
+
+                const cardValue = cardImage.dataset.handValue;
+
+                const cardIndex = hand.indexOf(cardValue);
+
+                if (cardIndex !== -1) {
+                    hand[cardIndex] = 'played';
+                    console.log("Hand after play (with dummy):", hand);
+                }
+
+            }
+
+            if (!dropZone.querySelector('img')) {
+                const cardImage = cardSlot.querySelector("img")
+                dropZone.appendChild(cardImage);
+                playedCard.push(cardValue);
+                console.log("Played cards:", playedCard);
+            }
+        });
     });
-
-    dropZone.addEventListener("drop", (e) => {
-        e.preventDefault();
-
-        dropZone.classList.remove('dragover');
-        const dropId = e.dataTransfer.getData("text");
-        const drop = document.getElementById(dropId);
-        const cardValue = e.dataTransfer.getData('handValue');
-        const cardSlot = drop;
-
-    if (!cardSlot) return;
-
-    const cardImage = cardSlot.querySelector("img");
-    if (cardImage) {
-
-        const cardValue = cardImage.dataset.handValue;
-
-        const cardIndex = hand.indexOf(cardValue);
-
-        if (cardIndex !== -1) {
-            hand[cardIndex] = 'played';
-            console.log("Hand after play (with dummy):", hand);
-        }
-
-    }
-
-        if (!dropZone.querySelector('img')) {
-            const cardImage = cardSlot.querySelector("img")
-            dropZone.appendChild(cardImage);
-            playedCard.push(cardValue);
-            console.log("Played cards:", playedCard);
-        }
-    });
-});
 }
 ////////////////////////////////////////////////////////////////
 
@@ -98,8 +102,8 @@ discardZone.addEventListener("drop", (e) => {
     const cardSlot = drop;
 
     if (!cardSlot) return;
-    
-   
+
+
     const cardImage = cardSlot.querySelector("img");
     if (cardImage) {
 
@@ -115,7 +119,7 @@ discardZone.addEventListener("drop", (e) => {
         cardSlot.removeChild(cardImage);
     }
 
-    
+
 
     const newCard = deck.pop();
     const newCardImg = document.createElement("img");
@@ -130,13 +134,13 @@ discardZone.addEventListener("drop", (e) => {
     }
 
     console.log("Hand after new card dealt:", hand);
-    
+
 
 });
 ////////////////////////////////////////////////////////////////
 scoreButton.addEventListener("click", () => {
-   
-    
+
+
     bonus.style.display = 'grid';
     const handResult = evaluateHand(playedCard);
     totalScore.textContent = points;
@@ -146,10 +150,14 @@ scoreButton.addEventListener("click", () => {
     playedCard = [];
     console.log(deck);
 
+    buildBonusDeck();
+    shuffleBonusDeck();
+    dealBonusCards()
+    console.log(bonusHand);
 });
 
 resetButton.addEventListener("click", () => {
-   
+
     resetCards();
     clearDrops();
     console.log(playedCard);
@@ -157,13 +165,52 @@ resetButton.addEventListener("click", () => {
 
 });
 
-bonusButton.addEventListener("click", () =>{
+bonusButton.addEventListener("click", () => {
     bonus.style.display = 'none';
+    bonusHand = [];
+    resetBonusCardImg();
     resetPositions();
     clearDrops();
     dealAnimation(dealNewCards);
 
-})
+});
+
+wagerButton.addEventListener("click", () => {
+
+    bonusZones.forEach(bonusZone => {
+        bonusZone.addEventListener("click", () => {
+
+            for (let i = 0; i < bonusHand.length; i++) {
+                if (bonusZone.id == "bonus" + i) {
+                    bonusIndex = i;
+                    console.log(i);
+
+                    let bonus = bonusHand[i];
+                    console.log(bonus);
+                    let bonusImg = document.createElement("img");
+                    bonusImg.src = "./cards/" + bonus + ".png";
+                    bonusZone.innerHTML = "";
+                    document.getElementById("bonus" + i).appendChild(bonusImg);
+                    bonusHand = [];
+
+                }
+
+            }
+
+        })
+    })
+
+});
+
+function resetBonusCardImg(){
+    bonusZones.forEach(bonusZone => {
+        let bonusImg = document.createElement("img");
+        bonusImg.src = "./cards/back.png";
+        bonusZone.innerHTML = "";
+        bonusZone.appendChild(bonusImg);
+
+    });
+};
 
 ////////////////////////////////////////////////////////////////
 function resetPositions() {
@@ -175,29 +222,29 @@ function resetPositions() {
         cardSlot.style.left = position.x + "px";
         cardSlot.style.top = position.y + "px";
         cardSlot.innerHTML = " ";
-        
+
     }
 }
-function resetCards(){
+function resetCards() {
     playedCard.forEach(card => {
-        
+
         const replaceCard = card;
         const newCardImg = document.createElement("img");
         newCardImg.src = `./cards/${replaceCard}.png`;
         newCardImg.dataset.handValue = replaceCard;
 
         for (let i = 0; i < 5; i++) {
-            
-            if(!document.getElementById("card" + i).children.length > 0){
-            document.getElementById("card" + i).appendChild(newCardImg);
-            hand[i] = replaceCard;
-    
+
+            if (!document.getElementById("card" + i).children.length > 0) {
+                document.getElementById("card" + i).appendChild(newCardImg);
+                hand[i] = replaceCard;
+
+            }
         }
-    }
-    playedCard = [];
+        playedCard = [];
     })
 }
-function clearDrops(){
+function clearDrops() {
     dropZones.forEach(dropZone => {
         dropZone.innerHTML = '';
     })
@@ -215,12 +262,31 @@ function buildDeck() {
     }
 }
 
+function buildBonusDeck() {
+    let value = "Z";
+    let types = ["1", "2", "3", "4", "5"];
+
+    for (let i = 0; i < types.length; i++) {
+        bonusDeck.push(value + "-" + types[i]);
+    }
+}
+
 function shuffleDeck() {
     for (let i = 0; i < deck.length; i++) {
         let j = Math.floor(Math.random() * deck.length);
         let temp = deck[i];
         deck[i] = deck[j];
         deck[j] = temp;
+    }
+
+}
+
+function shuffleBonusDeck() {
+    for (let i = 0; i < bonusDeck.length; i++) {
+        let j = Math.floor(Math.random() * bonusDeck.length);
+        let temp = bonusDeck[i];
+        bonusDeck[i] = bonusDeck[j];
+        bonusDeck[j] = temp;
     }
 
 }
@@ -240,8 +306,17 @@ function dealCards() {
     console.log(hand);
 }
 
-function dealNewCards(){
-    const remainingHand = hand.filter(card => card !== 'played'); 
+function dealBonusCards() {
+
+    for (let i = 0; i < 5; i++) {
+        let card = bonusDeck.pop();
+        bonusHand.push(card);
+    }
+
+}
+
+function dealNewCards() {
+    const remainingHand = hand.filter(card => card !== 'played');
     hand = remainingHand;
     console.log(remainingHand);
 
@@ -271,7 +346,7 @@ function startingPos() {
     console.log(startXDeck, startYDeck);
 }
 
-function replaceCard(){
+function replaceCard() {
     e.preventDefault();
 
     const dropId = e.dataTransfer.getData("text/plain");
@@ -279,8 +354,8 @@ function replaceCard(){
     const cardSlot = drop;
 
     if (!cardSlot) return;
-    
-   
+
+
     const cardImage = cardSlot.querySelector("img");
     if (cardImage) {
 
@@ -296,7 +371,7 @@ function replaceCard(){
         cardSlot.removeChild(cardImage);
     }
 
-    
+
 
     const newCard = deck.pop();
     const newCardImg = document.createElement("img");
