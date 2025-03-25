@@ -144,6 +144,7 @@ scoreButton.addEventListener("click", () => {
     bonus.style.display = 'grid';
     const handResult = evaluateHand(playedCard);
     totalScore.textContent = points;
+    wagerInput.value = 0;
     wagerInput.max = points;
     console.log("Hand Result:", handResult);
     console.log(points);
@@ -168,6 +169,8 @@ resetButton.addEventListener("click", () => {
 bonusButton.addEventListener("click", () => {
     bonus.style.display = 'none';
     bonusHand = [];
+    wagerInput.value = 0;
+    totalScore.textContent = points;
     resetBonusCardImg();
     resetPositions();
     clearDrops();
@@ -193,6 +196,29 @@ wagerButton.addEventListener("click", () => {
                     document.getElementById("bonus" + i).appendChild(bonusImg);
                     bonusHand = [];
 
+                    const wagerAmount = parseInt(wagerInput.value, 10);
+                    console.log(wagerAmount)
+
+                    console.log(points)
+
+                    switch(bonus){
+                        case "Z-1":
+                        points = points + (5 * wagerAmount);
+                        break;
+                        case "Z-2":
+                        points = points + (2 * wagerAmount);
+                        break;
+                        case "Z-3":
+                        points = points
+                        break;
+                        case "Z-4":
+                        points = points - Math.ceil(0.5 * wagerAmount);
+                        break;
+                        case "Z-5":
+                        points = points - wagerAmount;
+                        break;
+                    }
+
                 }
 
             }
@@ -211,6 +237,7 @@ function resetBonusCardImg(){
 
     });
 };
+
 
 ////////////////////////////////////////////////////////////////
 function resetPositions() {
