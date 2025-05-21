@@ -55,7 +55,7 @@ const Login = () => {
       const { accessToken } = res;
       //store token in localStorage
       localStorage.setItem("accessToken", accessToken);
-      navigate("/home");
+      navigate("/privateUserProfile");
     } catch (error) {
       if (
         error.response &&
@@ -68,7 +68,7 @@ const Login = () => {
   };
 
   if(user) {
-    navigate('/home')
+    navigate('/privateUserProfile')
     return
   }
 
@@ -90,7 +90,7 @@ const Login = () => {
                     placeholder="Enter username"
                   />
                   <Form.Text className="text-muted">
-                    We just might sell your data
+                   enter information
                   </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">

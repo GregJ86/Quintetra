@@ -29,7 +29,7 @@ const CardGame = () => {
   }, []);
 
   return (
-    <div>
+    <div >
       <h1 id="title">Quintetra</h1>
       <div className="window">
         <div className="table">
