@@ -149,7 +149,6 @@ scoreButton.addEventListener("click", () => {
     console.log("Hand Result:", handResult);
     console.log(points);
     playedCard = [];
-    console.log(deck);
 
     buildBonusDeck();
     shuffleBonusDeck();
@@ -320,7 +319,10 @@ function shuffleBonusDeck() {
 
 function dealCards() {
 
-    for (let i = 0; i < 5; i++) {
+    let numCards = Math.min(deck.length, 5);
+
+    if(numCards > 0){
+    for (let i = 0; i < numCards; i++) {
         let card = deck.pop();
         let cardImg = document.createElement("img");
         hand.push(card);
@@ -331,6 +333,8 @@ function dealCards() {
 
     }
     console.log(hand);
+    console.log(deck);
+}
 }
 
 function dealBonusCards() {
