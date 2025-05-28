@@ -24,8 +24,6 @@ var startYDeck = 0;
 const cardSlots = [];
 const cardPositions = [];
 
-//git remote add origin https://github.com/GregJ86/Quintetra.git
-
 window.onload = function () {
     buildDeck();
     shuffleDeck();
