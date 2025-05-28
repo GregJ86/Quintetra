@@ -17,6 +17,7 @@ const wagerButton = document.getElementById("wagerButton");
 const discardZone = document.getElementById("discard");
 const totalScore = document.getElementById("score");
 const wagerInput = document.getElementById('wager');
+const endGameButton = document.getElementById('endgame');
 
 var startXDeck = 0;
 var startYDeck = 0;
@@ -322,6 +323,9 @@ function dealCards() {
     let numCards = Math.min(deck.length, 5);
 
     if(numCards > 0){
+        if(numCards < 5){
+            endGameButton.style.display = 'grid';
+        }
     for (let i = 0; i < numCards; i++) {
         let card = deck.pop();
         let cardImg = document.createElement("img");
@@ -334,6 +338,8 @@ function dealCards() {
     }
     console.log(hand);
     console.log(deck);
+}else if(numCards == 0){
+    alert("No cards left in the deck!");
 }
 }
 

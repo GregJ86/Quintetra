@@ -65,6 +65,7 @@ const CardGame = () => {
           <div className="buttons">
             <button id="button">meld cards</button>
             <button id="reset">reset cards</button>
+            <button id="endgame">end game</button>
           </div>
 
           <div className="bottomGrid">
