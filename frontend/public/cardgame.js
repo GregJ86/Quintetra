@@ -34,6 +34,14 @@ window.onload = function () {
     console.log(deck);
 }
 
+/* prevents user from leaving page in the middle of a game
+
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+});
+
+leave as a comment during testing*/ 
+
 ///////////////////////////////////////////////////////////
 function initializeDragDropEvents() {
     cards.forEach((card, index) => {
