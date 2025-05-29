@@ -45,10 +45,21 @@
 }
 
 #score {
-    height: 50px;
+    height: 60px;
     width: 70px;
     border: 1px solid black;
     text-align: center;
+    grid-column: 6;
+    grid-row: 1;
+}
+
+#cardsLeft {
+    height: 60px;
+    width: 70px;
+    border: 1px solid black;
+    text-align: center;
+    grid-column: 6;
+    grid-row: 2;
 }
 
 #reset{
@@ -120,7 +131,8 @@
 
 #dropZones {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 60px; 
     gap: 5px;
 }
 

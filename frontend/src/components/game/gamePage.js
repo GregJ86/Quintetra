@@ -58,7 +58,9 @@ const CardGame = () => {
               {[0, 1, 2, 3, 4].map((index) => (
                 <div key={index} id={`play${index}`} className="dropZone"></div>
               ))}
-              <div id="score"></div>
+              <div id="score">Gold:</div>
+              <div id="cardsLeft"></div>
+              
             </div>
           </div>
 

@@ -16,6 +16,7 @@ const bonus = document.querySelector('.bonus');
 const wagerButton = document.getElementById("wagerButton");
 const discardZone = document.getElementById("discard");
 const totalScore = document.getElementById("score");
+const cardsLeft = document.getElementById("cardsLeft");
 const wagerInput = document.getElementById('wager');
 const endGameButton = document.getElementById('endgame');
 
@@ -152,7 +153,7 @@ scoreButton.addEventListener("click", () => {
 
     bonus.style.display = 'grid';
     const handResult = evaluateHand(playedCard);
-    totalScore.textContent = points;
+    totalScore.textContent = "Gold: " + points;
     wagerInput.value = 0;
     wagerInput.max = points;
     console.log("Hand Result:", handResult);
@@ -178,7 +179,7 @@ bonusButton.addEventListener("click", () => {
     bonus.style.display = 'none';
     bonusHand = [];
     wagerInput.value = 0;
-    totalScore.textContent = points;
+    totalScore.textContent = "Gold: " + points;
     resetBonusCardImg();
     resetPositions();
     clearDrops();
@@ -346,6 +347,7 @@ function dealCards() {
     }
     console.log(hand);
     console.log(deck);
+    cardsLeft.textContent = "Deck: " + deck.length
 }else if(numCards == 0){
     alert("No cards left in the deck!");
 }
