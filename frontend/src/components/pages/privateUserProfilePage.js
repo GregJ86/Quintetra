@@ -20,7 +20,29 @@ const PrivateUserProfile = () => {
     setUser(getUserInfo());
   }, []);
 
-  if (!user) return (<div><h4>Log in to view this page.</h4></div>);
+  if (!user || !user.username) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
+        <h2 className="text-2xl font-semibold mb-4 text-center">
+          Welcome to Your Profile Page
+        </h2>
+        <p className="mb-6 text-center max-w-md">
+          This is the page where you can view your profile if you're logged in.
+          Please sign up or try a quick play!
+        </p>
+        <div className="flex space-x-4">
+          {/* Sign Up Link */}
+          <div className="mb-4 w-full">
+            <a href="/signup" className="flex justify-center items-center text-3xl text-blue-500 hover:text-blue-700">Sign Up</a>
+          </div>
+          {/* Quick Play Link */}
+          <div className="w-full">
+            <a href="/gamePage" className="flex justify-center items-center text-3xl text-blue-500 hover:text-blue-700">Quick Play</a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-green-200 flex justify-center items-center min-h-screen bg-gray-100">
