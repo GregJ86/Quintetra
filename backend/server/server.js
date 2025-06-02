@@ -9,6 +9,8 @@ const dbConnection = require('./config/db.config')
 const editUser = require('./routes/userEditUser')
 const deleteUser = require('./routes/userDeleteAll')
 const getHighScoreRoute = require('./routes/userGetHighScore')
+const putHighScoreRoute = require('./routes/userPutHighScore')
+
 
 
 
@@ -25,6 +27,7 @@ app.use('/user', getUserByIdRoute)
 app.use('/user', editUser)
 app.use('/user', deleteUser)
 app.use('/user', getHighScoreRoute)
+app.use('/user', putHighScoreRoute)
 
 
 

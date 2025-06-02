@@ -24,7 +24,7 @@ const PrivateUserProfile = () => {
 
 
     if (userInfo && userInfo.username) {
-      fetch(`http://localhost:8081/user/highscore/${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/highscore/${userInfo.username}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

@@ -54,3 +54,11 @@ POST  http://localhost:8081/user/deleteAll
 ###
 GET http://localhost:8081/user/highscore/ggregg86
 Content-Type: application/json 
+
+### 
+PUT http://localhost:8081/user/highscore/ggregg86
+Content-Type: application/json
+
+{
+  "newHighScore": 150
+}
