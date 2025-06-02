@@ -20,7 +20,7 @@ const PrivateUserProfile = () => {
   useEffect(() => {
     const userInfo = getUserInfo();
     setUser(userInfo);
-     console.log("User Info:", userInfo.username);
+     
 
 
     if (userInfo && userInfo.username) {
