@@ -143,6 +143,8 @@ discardZone.addEventListener("drop", (e) => {
         hand[cardIndex] = newCard;
     }
 
+    cardsLeft.textContent = "Deck: " + deck.length
+
     console.log("Hand after new card dealt:", hand);
 
 
