@@ -1,5 +1,38 @@
 import React, { useEffect } from 'react';
-import './cardgame.css';  
+import './cardgame.css';
+import getUserInfo from "../../utilities/decodeJwt";  
+
+const handleEndGameClick = async () => {
+  const currentPoints = window.gameState.getPoints() ?? 0; 
+  console.log("Current points at end game:", currentPoints);
+
+  const userInfo = getUserInfo();
+  if (!userInfo || !userInfo.username) {
+    alert("You must be logged in to save your high score.");
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/highscore/${userInfo.username}`,
+      {
+        method: "PUT",  
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          newHighScore: currentPoints,  
+        }),
+      }
+    );
+
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const data = await response.json();
+    alert(`High score updated: ${data.highScore}`);
+  } catch (err) {
+    console.error("Failed to update high score:", err);
+    alert("Error updating high score. Please try again.");
+  }
+};
 
 const CardGame = () => {
   useEffect(() => {
@@ -67,7 +100,7 @@ const CardGame = () => {
           <div className="buttons">
             <button id="button">meld cards</button>
             <button id="reset">reset cards</button>
-            <button id="endgame">end game</button>
+            <button id="endgame" onClick={handleEndGameClick}>end game</button>
           </div>
 
           <div className="bottomGrid">

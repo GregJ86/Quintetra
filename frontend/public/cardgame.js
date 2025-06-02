@@ -26,6 +26,9 @@ var startYDeck = 0;
 const cardSlots = [];
 const cardPositions = [];
 
+window.gameState = window.gameState || {};
+window.gameState.getPoints = () => points;
+
 window.onload = function () {
     buildDeck();
     shuffleDeck();
