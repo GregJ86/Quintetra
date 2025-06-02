@@ -44,7 +44,7 @@ window.addEventListener('beforeunload', function (e) {
   e.preventDefault();
 });
 
-leave as a comment during testing*/ 
+leave as a comment during testing*/
 
 ///////////////////////////////////////////////////////////
 function initializeDragDropEvents() {
@@ -110,45 +110,51 @@ discardZone.addEventListener("dragover", (e) => {
 discardZone.addEventListener("drop", (e) => {
     e.preventDefault();
 
-    const dropId = e.dataTransfer.getData("text/plain");
-    const drop = document.getElementById(dropId);
-    const cardSlot = drop;
+    if (deck.length > 0) {
+        const dropId = e.dataTransfer.getData("text/plain");
+        const drop = document.getElementById(dropId);
+        const cardSlot = drop;
 
-    if (!cardSlot) return;
+        if (!cardSlot) return;
 
 
-    const cardImage = cardSlot.querySelector("img");
-    if (cardImage) {
+        const cardImage = cardSlot.querySelector("img");
+        if (cardImage) {
 
-        const cardValue = cardImage.dataset.handValue;
+            const cardValue = cardImage.dataset.handValue;
 
-        const cardIndex = hand.indexOf(cardValue);
+            const cardIndex = hand.indexOf(cardValue);
 
-        if (cardIndex !== -1) {
-            hand[cardIndex] = 'discarded';
-            console.log("Hand after discard (with dummy):", hand);
+            if (cardIndex !== -1) {
+                hand[cardIndex] = 'discarded';
+                console.log("Hand after discard (with dummy):", hand);
+            }
+
+            cardSlot.removeChild(cardImage);
         }
 
-        cardSlot.removeChild(cardImage);
+        const newCard = deck.pop();
+        const newCardImg = document.createElement("img");
+        newCardImg.src = `./cards/${newCard}.png`;
+        newCardImg.dataset.handValue = newCard;
+
+        cardSlot.appendChild(newCardImg);
+
+        const cardIndex = hand.indexOf('discarded');
+        if (cardIndex !== -1) {
+            hand[cardIndex] = newCard;
+        }
+
+        cardsLeft.textContent = "Deck: " + deck.length
+
+        console.log("Hand after new card dealt:", hand);
+        if (deck.length === 0) {
+            endGameButton.style.display = 'grid';
+        }
+    } else {
+        alert("No cards left in the deck!");
     }
 
-
-
-    const newCard = deck.pop();
-    const newCardImg = document.createElement("img");
-    newCardImg.src = `./cards/${newCard}.png`;
-    newCardImg.dataset.handValue = newCard;
-
-    cardSlot.appendChild(newCardImg);
-
-    const cardIndex = hand.indexOf('discarded');
-    if (cardIndex !== -1) {
-        hand[cardIndex] = newCard;
-    }
-
-    cardsLeft.textContent = "Deck: " + deck.length
-
-    console.log("Hand after new card dealt:", hand);
 
 
 });
@@ -215,22 +221,22 @@ wagerButton.addEventListener("click", () => {
 
                     console.log(points)
 
-                    switch(bonus){
+                    switch (bonus) {
                         case "Z-1":
-                        points = points + (5 * wagerAmount);
-                        break;
+                            points = points + (5 * wagerAmount);
+                            break;
                         case "Z-2":
-                        points = points + (2 * wagerAmount);
-                        break;
+                            points = points + (2 * wagerAmount);
+                            break;
                         case "Z-3":
-                        points = points
-                        break;
+                            points = points
+                            break;
                         case "Z-4":
-                        points = points - Math.ceil(0.5 * wagerAmount);
-                        break;
+                            points = points - Math.ceil(0.5 * wagerAmount);
+                            break;
                         case "Z-5":
-                        points = points - wagerAmount;
-                        break;
+                            points = points - wagerAmount;
+                            break;
                     }
 
                 }
@@ -242,7 +248,7 @@ wagerButton.addEventListener("click", () => {
 
 });
 
-function resetBonusCardImg(){
+function resetBonusCardImg() {
     bonusZones.forEach(bonusZone => {
         let bonusImg = document.createElement("img");
         bonusImg.src = "./cards/back.png";
@@ -336,26 +342,27 @@ function dealCards() {
 
     let numCards = Math.min(deck.length, 5);
 
-    if(numCards > 0){
-        if(numCards < 5){
+    if (numCards > 0) {
+        if (numCards < 5) {
             endGameButton.style.display = 'grid';
         }
-    for (let i = 0; i < numCards; i++) {
-        let card = deck.pop();
-        let cardImg = document.createElement("img");
-        hand.push(card);
-        cardImg.src = "./cards/" + card + ".png";
-        cardImg.dataset.handValue = card;
+        for (let i = 0; i < numCards; i++) {
+            let card = deck.pop();
+            let cardImg = document.createElement("img");
+            hand.push(card);
+            cardImg.src = "./cards/" + card + ".png";
+            cardImg.dataset.handValue = card;
 
-        document.getElementById("card" + i).appendChild(cardImg);
+            document.getElementById("card" + i).appendChild(cardImg);
 
+        }
+        console.log(hand);
+        console.log(deck);
+        cardsLeft.textContent = "Deck: " + deck.length
+    } else if (numCards == 0) {
+        alert("No cards left in the deck!");
+        endGameButton.style.display = 'grid';
     }
-    console.log(hand);
-    console.log(deck);
-    cardsLeft.textContent = "Deck: " + deck.length
-}else if(numCards == 0){
-    alert("No cards left in the deck!");
-}
 }
 
 function dealBonusCards() {
