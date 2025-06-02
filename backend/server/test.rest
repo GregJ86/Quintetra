@@ -52,48 +52,5 @@ Content-Type: application/json
 POST  http://localhost:8081/user/deleteAll
 
 ###
-POST http://localhost:8081/station/stations
-Content-Type: application/json
-
-{
-  "stationName": "Salem",
-  "city": "Salem",
-  "stationLine": "NEWBURYPORT/ROCKPORT",
-  "stationPic": "https://upload.wikimedia.org/wikipedia/commons/6/60/Salem_Station_Platform.jpg"
-}
-
-###
-GET http://localhost:8081/station/getAll
-Content-Type: application/json
-
-###
-PUT http://localhost:8081/station/stationUpdateStationById
-Content-Type: application/json
-
-{
-  "id": "67e41783b0643210f4dc04b2",
-  "stationName": "SALEM",
-  "city": "Salem",
-  "stationLine": "NEWBURYPORT/ROCKPORT",
-  "stationPic": "https://upload.wikimedia.org/wikipedia/commons/6/60/Salem_Station_Platform.jpg"
-}
-
-###
-Get http://localhost:8081/station/getStationById
-Content-Type: application/json
-
-{
-  "stationId": "67e41783b0643210f4dc04b2"
-}
-
-
-###
-DELETE http://localhost:8081/station/deleteStationById
-Content-Type: application/json
-
-{
-  "stationId": "67e41773b0643210f4dc04ac"
-}
-
-###
-POST  http://localhost:8081/station/deleteAll
+GET http://localhost:8081/user/highscore/ggregg86
+Content-Type: application/json 

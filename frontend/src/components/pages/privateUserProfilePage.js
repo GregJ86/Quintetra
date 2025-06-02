@@ -5,6 +5,7 @@ import getUserInfo from "../../utilities/decodeJwt";
 const PrivateUserProfile = () => {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState({});
+  const [highScore, setHighScore] = useState(null);
   const navigate = useNavigate();
 
   // Handle log out button
@@ -17,7 +18,26 @@ const PrivateUserProfile = () => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    setUser(getUserInfo());
+    const userInfo = getUserInfo();
+    setUser(userInfo);
+     console.log("User Info:", userInfo.username);
+
+
+    if (userInfo && userInfo.username) {
+      fetch(`http://localhost:8081/user/highscore/${userInfo.username}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Fetched high score data:", data);  // Should show { highScore: 0 }
+        setHighScore(data.highScore);
+      })
+      .catch(error => console.error("Error fetching high score:", error));
+    }
+
   }, []);
 
   if (!user || !user.username) {
@@ -49,6 +69,12 @@ const PrivateUserProfile = () => {
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
         {/* Profile Username */}
         <h1 className="text-3xl font-semibold text-center mb-6">{user.username}</h1>
+
+        {/* High Score Section */}
+        <h2 className="text-xl text-center font-semibold mb-4">
+          High Score: {highScore}
+        </h2>
+
 
         {/* Log Out Button */}
         <div className="flex justify-center">

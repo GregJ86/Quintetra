@@ -18,6 +18,10 @@ const newUserSchema = new mongoose.Schema(
       type: String,
       min : 8
     },
+    highScore: {
+      type: Number,
+      default: 0,
+    },
     date: {
       type: Date,
       default: Date.now,
