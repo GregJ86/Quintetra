@@ -148,9 +148,7 @@ discardZone.addEventListener("drop", (e) => {
         cardsLeft.textContent = "Deck: " + deck.length
 
         console.log("Hand after new card dealt:", hand);
-        if (deck.length === 0) {
-            endGameButton.style.display = 'grid';
-        }
+       
     } else {
         alert("No cards left in the deck!");
     }
@@ -344,9 +342,7 @@ function dealCards() {
     let numCards = Math.min(deck.length, 5);
 
     if (numCards > 0) {
-        if (numCards < 5) {
-            endGameButton.style.display = 'grid';
-        }
+       
         for (let i = 0; i < numCards; i++) {
             let card = deck.pop();
             let cardImg = document.createElement("img");
@@ -362,7 +358,7 @@ function dealCards() {
         cardsLeft.textContent = "Deck: " + deck.length
     } else if (numCards == 0) {
         alert("No cards left in the deck!");
-        endGameButton.style.display = 'grid';
+       
     }
 }
 

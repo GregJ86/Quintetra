@@ -73,7 +73,7 @@
 #button {
 
     margin: 10px;
-    margin-left: 440px;
+    margin-left: 340px;
     align-self: center;
     height: 50px;
     width: 75px;
@@ -87,12 +87,21 @@
     width: 75px;
     background-color: rgba(210, 238, 207, 0.878);
     cursor: pointer;
-    display: none;
+   
+}
+
+#newgame{
+    align-self: center;
+    height: 50px;
+    width: 75px;
+    background-color: rgba(210, 238, 207, 0.878);
+    cursor: pointer;
+   
 }
 
 .buttons{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
 }
 
 #button:hover{
@@ -104,6 +113,10 @@
     border-radius: 5px;
 }
 #endgame:hover{
+    border: solid yellow;
+    border-radius: 5px;
+}
+#newgame:hover{
     border: solid yellow;
     border-radius: 5px;
 }

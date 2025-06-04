@@ -76,9 +76,9 @@ const CardGame = () => {
             </div>
 
             <div className="bonusButtons">
-              <button id="bonusButton">back to game</button>
+              <button id="bonusButton">Exit</button>
               <input type="number" id="wager" min="0" />
-              <button id="wagerButton">wager gold</button>
+              <button id="wagerButton">Wager</button>
             </div>
           </div>
 
@@ -94,13 +94,15 @@ const CardGame = () => {
               <div id="score">Gold:</div>
               <div id="cardsLeft"></div>
               
+              
             </div>
           </div>
 
           <div className="buttons">
-            <button id="button">meld cards</button>
-            <button id="reset">reset cards</button>
-            <button id="endgame" onClick={handleEndGameClick}>end game</button>
+            <button id="button">Meld</button>
+            <button id="reset">Undo</button>
+            <button id="endgame" onClick={handleEndGameClick}>Quit</button>
+            <button id="newgame">New</button>
           </div>
 
           <div className="bottomGrid">
