@@ -34,10 +34,10 @@ const Login = () => {
 
   useEffect(() => {
 
-    const obj = getUserInfo(user)
+    const obj = getUserInfo()
     setUser(obj)
 
-});
+}, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
