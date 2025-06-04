@@ -153,7 +153,7 @@ discardZone.addEventListener("drop", (e) => {
         console.log("Hand after new card dealt:", hand);
        
     } else {
-        alert("No cards left in the deck!");
+        
     }
 
 
