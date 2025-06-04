@@ -19,6 +19,10 @@ const totalScore = document.getElementById("score");
 const cardsLeft = document.getElementById("cardsLeft");
 const wagerInput = document.getElementById('wager');
 const endGameButton = document.getElementById('endgame');
+const newGameWindow = document.querySelector('.newGameWindow');
+const newGameButton = document.getElementById('newgame');
+const newGameYesButton = document.getElementById('ngStartButton');
+const newGameCancelButton = document.getElementById('ngCancelButton');
 
 var startXDeck = 0;
 var startYDeck = 0;
@@ -254,6 +258,34 @@ wagerButton.addEventListener("click", () => {
 
 });
 
+newGameButton.addEventListener("click", () => {
+    newGameWindow.style.display = 'grid';
+});
+
+newGameYesButton.addEventListener("click", () => {
+    deck = [];
+    hand = [];
+    playedCard = [];
+    points = 0;
+
+    buildDeck();
+    shuffleDeck();
+
+    clearDrops();
+    clearHand();
+    dealAnimation(dealCards);
+
+    totalScore.textContent = "Gold: "
+    cardsLeft.textContent = "Deck: " + deck.length;
+    updateButtonStates();
+    newGameWindow.style.display = 'none';
+});
+
+newGameCancelButton.addEventListener("click", ()=> {
+    newGameWindow.style.display = 'none';
+
+});
+
 function resetBonusCardImg() {
     bonusZones.forEach(bonusZone => {
         let bonusImg = document.createElement("img");
@@ -301,6 +333,12 @@ function resetCards() {
 function clearDrops() {
     dropZones.forEach(dropZone => {
         dropZone.innerHTML = '';
+    });
+    updateButtonStates();
+}
+function clearHand() {
+    cards.forEach(card => {
+        card.innerHTML = '';
     });
     updateButtonStates();
 }

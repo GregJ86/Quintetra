@@ -82,6 +82,14 @@ const CardGame = () => {
             </div>
           </div>
 
+          <div className = "newGameWindow">
+            <p>Would you like to <br />start a new game?</p>
+            <div className = "restartButtons">
+              <button id="ngStartButton">Yes</button>
+              <button id="ngCancelButton">No</button>
+            </div>
+          </div>
+
           <div className="topGrid">
             <div id="deck">
               <img src="./cards/BACK.png" alt="deck of cards" />
