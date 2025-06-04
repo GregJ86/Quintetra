@@ -51,6 +51,11 @@ leave as a comment during testing*/
 function initializeDragDropEvents() {
     cards.forEach((card, index) => {
         card.addEventListener('dragstart', (e) => {
+            const img = card.querySelector('img');
+            if(!img){
+                e.preventDefault();
+                return;
+            }
             let cardValue = hand[index];
             e.dataTransfer.setData('text', card.id);
             e.dataTransfer.setData('handValue', cardValue);
