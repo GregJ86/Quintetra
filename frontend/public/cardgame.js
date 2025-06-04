@@ -35,6 +35,7 @@ window.onload = function () {
     dealCards();
     startingPos();
     initializeDragDropEvents();
+    updateButtonStates();
     console.log(deck);
 }
 
@@ -98,6 +99,8 @@ function initializeDragDropEvents() {
                 playedCard.push(cardValue);
                 console.log("Played cards:", playedCard);
             }
+
+            updateButtonStates();
         });
     });
 }
@@ -293,7 +296,8 @@ function resetCards() {
 function clearDrops() {
     dropZones.forEach(dropZone => {
         dropZone.innerHTML = '';
-    })
+    });
+    updateButtonStates();
 }
 //////////////////////////////////////////////////////////////////
 function buildDeck() {
@@ -442,6 +446,14 @@ function replaceCard() {
     }
 
     console.log("Hand after new card dealt:", hand);
+}
+
+function updateButtonStates() {
+    
+    const hasCardInDropZone = Array.from(dropZones).some(dropZone => dropZone.querySelector('img'));
+
+    scoreButton.disabled = !hasCardInDropZone;
+    resetButton.disabled = !hasCardInDropZone;
 }
 
 

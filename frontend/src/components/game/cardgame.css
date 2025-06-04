@@ -104,11 +104,11 @@
     grid-template-columns: 1fr 1fr 1fr 1fr ;
 }
 
-#button:hover{
+#button:not(:disabled):hover{
     border: solid yellow;
     border-radius: 5px;
 }
-#reset:hover{
+#reset:not(:disabled):hover{
     border: solid yellow;
     border-radius: 5px;
 }
