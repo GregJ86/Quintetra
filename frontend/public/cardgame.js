@@ -275,12 +275,13 @@ function resetPositions() {
 function resetCards() {
     playedCard.forEach(card => {
 
+        
         const replaceCard = card;
         const newCardImg = document.createElement("img");
         newCardImg.src = `./cards/${replaceCard}.png`;
         newCardImg.dataset.handValue = replaceCard;
 
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < hand.length; i++) {
 
             if (!document.getElementById("card" + i).children.length > 0) {
                 document.getElementById("card" + i).appendChild(newCardImg);
