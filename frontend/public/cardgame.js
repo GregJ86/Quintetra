@@ -23,6 +23,8 @@ const newGameWindow = document.querySelector('.newGameWindow');
 const newGameButton = document.getElementById('newgame');
 const newGameYesButton = document.getElementById('ngStartButton');
 const newGameCancelButton = document.getElementById('ngCancelButton');
+const quitWindow = document.querySelector('.quitGameWindow');
+const quitGameCancelButton = document.getElementById('quitCancelButton');
 
 var startXDeck = 0;
 var startYDeck = 0;
@@ -284,6 +286,14 @@ newGameYesButton.addEventListener("click", () => {
 newGameCancelButton.addEventListener("click", ()=> {
     newGameWindow.style.display = 'none';
 
+});
+
+endGameButton.addEventListener("click", () => {
+    quitWindow.style.display = 'grid';
+});
+
+quitGameCancelButton.addEventListener("click", () => {
+    quitWindow.style.display = 'none';
 });
 
 function resetBonusCardImg() {

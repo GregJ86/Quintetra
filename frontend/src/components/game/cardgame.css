@@ -310,7 +310,7 @@ div.card:hover{
     border-radius: 5px;
 }
 
-.newGameWindow{
+.newGameWindow, .quitGameWindow{
     position: absolute;
     width: fit-content;
     align-items: center;
@@ -327,7 +327,7 @@ div.card:hover{
     
 }
 
-.newGameWindow p {
+.newGameWindow p, .quitGameWindow p {
   font-size: 16px;
   font-weight: bold;
   white-space: normal;
@@ -335,7 +335,7 @@ div.card:hover{
   color: #333;
 }
 
-#ngStartButton{
+#ngStartButton, #quitConfirmButton{
     border: 2px solid black;
     border-radius: 5px;
     margin: 5px;
@@ -343,14 +343,15 @@ div.card:hover{
     margin-left: 20px;
     color: white;
 }
-#ngCancelButton{
+#ngCancelButton, #quitCancelButton{
     border: 2px solid black;
     border-radius: 5px;
     margin: 5px;                        
     background-color: red;
     color: white;
 }
-#ngStartButton:hover, #ngCancelButton:hover{
+#ngStartButton:hover, #ngCancelButton:hover,
+#quitConfirmButton:hover, #quitCancelButton:hover {
     border: solid yellow;
     border-radius: 5px;
 }

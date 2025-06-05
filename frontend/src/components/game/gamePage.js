@@ -90,6 +90,14 @@ const CardGame = () => {
             </div>
           </div>
 
+          <div className = "quitGameWindow">
+            <p>Are you sure that<br />you want to quit?</p>
+            <div className = "restartButtons">
+              <button id="quitConfirmButton" onClick={handleEndGameClick}>Yes</button>
+              <button id="quitCancelButton">No</button>
+            </div>
+          </div>
+
           <div className="topGrid">
             <div id="deck">
               <img src="./cards/BACK.png" alt="deck of cards" />
@@ -109,7 +117,7 @@ const CardGame = () => {
           <div className="buttons">
             <button id="button">Meld</button>
             <button id="reset">Undo</button>
-            <button id="endgame" onClick={handleEndGameClick}>Quit</button>
+            <button id="endgame">Quit</button>
             <button id="newgame">New</button>
           </div>
 
