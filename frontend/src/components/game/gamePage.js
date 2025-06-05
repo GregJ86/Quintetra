@@ -27,7 +27,7 @@ const handleEndGameClick = async () => {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const data = await response.json();
-    alert(`High score updated: ${data.highScore}`);
+    console.log(`High score: ${data.highScore}`);
   } catch (err) {
     console.error("Failed to update high score:", err);
     alert("Error updating high score. Please try again.");
