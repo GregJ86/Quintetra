@@ -235,16 +235,16 @@ wagerButton.addEventListener("click", () => {
 
                     switch (bonus) {
                         case "Z-1":
-                            points = points + (5 * wagerAmount);
+                            points = points + (10 * wagerAmount);
                             break;
                         case "Z-2":
-                            points = points + (2 * wagerAmount);
+                            points = points + (5 * wagerAmount);
                             break;
                         case "Z-3":
-                            points = points
+                            points = points + (2 * wagerAmount);
                             break;
                         case "Z-4":
-                            points = points - Math.ceil(0.5 * wagerAmount);
+                            points = points;
                             break;
                         case "Z-5":
                             points = points - wagerAmount;
