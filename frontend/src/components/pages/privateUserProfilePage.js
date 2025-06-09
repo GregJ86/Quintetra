@@ -99,16 +99,8 @@ const PrivateUserProfile = () => {
           High Score: {highScore}
         </h2>
 
-
-        {/* Log Out Button */}
-        <div className="flex justify-center">
-          <button
-            className="bg-blue-500 text-white px-6 py-3 rounded-lg text-lg hover:bg-blue-700 transition duration-300"
-            onClick={handleShow}
-          >
-            Log Out
-          </button>
-        </div>
+        
+        
 
         {/* Modal */}
         {show && (
