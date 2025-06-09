@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import getUserInfo from "../../utilities/decodeJwt";
 import { UserContext } from "../../App";
 
-const PRIMARY_COLOR ="rgb(62, 158, 97)";
+const PRIMARY_COLOR = "rgb(62, 158, 97)";
 const SECONDARY_COLOR = '#0c0c1f'
 const url = `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/login`;
 
@@ -23,7 +23,7 @@ const Login = () => {
     fontWeight: "bold",
     textDecoration: "none",
   };
-  
+
   let buttonStyling = {
     background: PRIMARY_COLOR,
     borderStyle: "none",
@@ -39,7 +39,7 @@ const Login = () => {
     const obj = getUserInfo()
     setUser(obj)
 
-}, []);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const Login = () => {
     }
   };
 
-  
+
 
   return (
     <>
@@ -69,7 +69,7 @@ const Login = () => {
         <div className="container-fluid h-custom vh-100">
           <div
             className="row d-flex justify-content-center align-items-center h-100 "
-            >
+          >
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
               <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -81,7 +81,7 @@ const Login = () => {
                     placeholder="Enter username"
                   />
                   <Form.Text className="text-muted">
-                   enter information
+                    enter information
                   </Form.Text>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -100,9 +100,14 @@ const Login = () => {
                       <Link to="/signup" style={labelStyling}> Sign up
                       </Link>
                     </span>
+                    <br />
+                    <span>
+                      <Link to="/privateUserProfile" style={labelStyling}> continue as guest
+                      </Link>
+                    </span>
                   </Form.Text>
                 </Form.Group>
-                
+
                 {error && <div style={labelStyling} className='pt-3'>{error}</div>}
                 <Button
                   variant="primary"

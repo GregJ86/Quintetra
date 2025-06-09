@@ -18,9 +18,9 @@ const Landingpage = () => {
                     <a href="/login" className="flex justify-center items-center text-3xl text-blue-500 hover:text-blue-700">Login</a>
                 </div>
                 
-                {/* Quick Play Link */}
+                {/* Continue as Guest Link */}
                 <div className="w-full">
-                    <a href="/gamePage" className="flex justify-center items-center text-3xl text-blue-500 hover:text-blue-700">Quick Play</a>
+                    <a href="/privateUserProfile" className="flex justify-center items-center text-3xl text-blue-500 hover:text-blue-700">Continue as Guest</a>
                 </div>
             </div>
         </div>

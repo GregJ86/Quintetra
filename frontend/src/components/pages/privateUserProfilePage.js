@@ -5,10 +5,10 @@ import { UserContext } from "../../App";
 
 const PrivateUserProfile = () => {
   const [show, setShow] = useState(false);
-  const {user, setUser} = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const [highScore, setHighScore] = useState(null);
   const navigate = useNavigate();
-  
+
 
   // Handle log out button
   const handleLogout = () => {
@@ -23,22 +23,22 @@ const PrivateUserProfile = () => {
   useEffect(() => {
     const userInfo = getUserInfo();
     setUser(userInfo);
-     
+
 
 
     if (userInfo && userInfo.username) {
       fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/highscore/${userInfo.username}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log("Fetched high score data:", data);  // Should show { highScore: 0 }
-        setHighScore(data.highScore);
-      })
-      .catch(error => console.error("Error fetching high score:", error));
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("Fetched high score data:", data);
+          setHighScore(data.highScore);
+        })
+        .catch(error => console.error("Error fetching high score:", error));
     }
 
   }, []);
@@ -47,20 +47,41 @@ const PrivateUserProfile = () => {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
         <h2 className="text-2xl font-semibold mb-4 text-center">
-          Welcome to Your Profile Page
+          Welcome to Quintetra!
         </h2>
         <p className="mb-6 text-center max-w-md">
-          This is the page where you can view your profile if you're logged in.
-          Please sign up or try a quick play!
+          Sign up or log in to view your game progress!
+          <br></br>
+          Not interested? Try a quick play!
         </p>
         <div className="flex space-x-4">
           {/* Sign Up Link */}
           <div className="mb-4 w-full">
-            <a href="/signup" className="flex justify-center items-center text-3xl text-blue-500 hover:text-blue-700">Sign Up</a>
+            <button
+              onClick={() => navigate("/signup")}
+              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+            >
+              Signup
+            </button>
+
+          </div>
+          {/* Login Link */}
+          <div className="mb-4 w-full">
+            <button
+              onClick={() => navigate("/login")}
+              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+            >
+              Login
+            </button>
           </div>
           {/* Quick Play Link */}
           <div className="w-full">
-            <a href="/gamePage" className="flex justify-center items-center text-3xl text-blue-500 hover:text-blue-700">Quick Play</a>
+            <button
+              onClick={() => (window.location.href = "/gamePage")}
+              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+            >
+              Play
+            </button>
           </div>
         </div>
       </div>

@@ -102,8 +102,15 @@ const Register = () => {
                       <Link to="/login" style={labelStyling}> Log in
                       </Link>
                     </span>
+                    <br/>
+                    <span>
+                      <Link to="/privateUserProfile" style={labelStyling}> continue as guest
+                      </Link>
+                    </span>
                   </Form.Text>
+                  
                 </Form.Group>
+                
                 
                 {error && (
                   <div style={labelStyling} className="pt-3">
