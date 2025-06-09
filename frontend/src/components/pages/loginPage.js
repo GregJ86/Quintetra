@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import getUserInfo from "../../utilities/decodeJwt";
+import { UserContext } from "../../App";
 
 const PRIMARY_COLOR ="rgb(62, 158, 97)";
 const SECONDARY_COLOR = '#0c0c1f'
 const url = `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/login`;
 
 const Login = () => {
-  const [user, setUser] = useState(null)
+  const { setUser } = useContext(UserContext);
+
   const [data, setData] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [bgColor] = useState(SECONDARY_COLOR);
@@ -46,6 +48,7 @@ const Login = () => {
       const { accessToken } = res;
       //store token in localStorage
       localStorage.setItem("accessToken", accessToken);
+      setUser(getUserInfo());
       navigate("/privateUserProfile");
     } catch (error) {
       if (
@@ -58,10 +61,7 @@ const Login = () => {
     }
   };
 
-  if(user) {
-    navigate('/privateUserProfile')
-    return
-  }
+  
 
   return (
     <>

@@ -28,8 +28,9 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
-      <UserContext.Provider value={user}>
+      
+      <UserContext.Provider value={{user, setUser}}>
+        <Navbar />
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/home" element={<HomePage />} />

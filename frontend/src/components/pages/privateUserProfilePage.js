@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import getUserInfo from "../../utilities/decodeJwt";
+import { UserContext } from "../../App";
 
 const PrivateUserProfile = () => {
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState({});
+  const {user, setUser} = useContext(UserContext);
   const [highScore, setHighScore] = useState(null);
   const navigate = useNavigate();
+  
 
   // Handle log out button
   const handleLogout = () => {
     localStorage.clear();
+    setUser(null);
     navigate("/");
   };
 
