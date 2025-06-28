@@ -63,7 +63,7 @@ const CardGame = () => {
 
   return (
     <div className="bg-green-200 min-h-screen bg-gray-100">
-      <h1 id="title">Quintetra</h1>
+      <h1 id="title">Quintetre</h1>
       <div className="window">
         <div className="table">
           <div className="bonus">

@@ -38,7 +38,8 @@ export default function Navbar() {
       <Container className="d-flex justify-content-between align-items-center">
         <Nav className="me-auto">
           <Nav.Link href="/privateUserProfile">Home</Nav.Link>
-          <Nav.Link href="/gamePage">Game</Nav.Link>
+          <Nav.Link href="/tutorialPage">Tutorial</Nav.Link>
+          <Nav.Link href="/gamePage">New Game</Nav.Link>
         </Nav>
 
         {user && (
