@@ -4,64 +4,76 @@ import React, { useState } from "react";
 const TutorialPage = () => {
     const tutorialSteps = [
         {
-            //image: "/images/tutorial-intro.png",
-            text: `Welcome to **Quintetra** — a fast-paced card game where the goal is simple: **craft as much gold as possible** by melding your best cards!
+            image: "/images/tutorial1.png",
+            text: `Welcome to Quintetre — a fast-paced card game where the goal is simple: craft as much gold as possible by melding your best cards!
 
         A meld is when you play multiple cards together in a set — like a pair, three-of-a-kind, or a straight. The better the meld, the more gold you earn!
 
         Let’s break it down step-by-step.`,
         },
         {
-            //image: "/images/tutorial-meld.png",
-            text: `In **Quintetra**, a **meld** is a group of cards played together in a pattern — like pairs, triples, or even a royal flush.
-
-        The more cards you meld at once, the bigger the multiplier you’ll get!`,
+            image: "/images/tutorial2.png",
+            text: `In Quintetre, you craft gold by "melding" sets of cards together.
+        What is a meld?
+        A meld is a set 2, 3, 4, or 5 cards. 
+        Valid melds include:
+            2 card meld:  Pair. (2 cards of same face value) 
+            3 card meld:  3 of a kind. (3 cards of same face value)
+            4 card melds: 2 pair, 4 of a kind.
+            5 card melds (Quintets): Full house (pair and 3 of a kind)
+            Flush (all cards same suit), 
+            straight (all cards ascending face value),
+            straight flush (all cards ascending value AND same face value).
+            Royal flush (straight flush of 10, J, Q, K, A.)
+            You might be familiar with these combinations if you've played poker.
+            
+            To play a meld, simply drag the cards from your hand to the dropzones above,
+            and then hit the meld button to craft your gold!`,
         },
         {
-            //image: "/images/tutorial-gold-values.png",
-            text: `Each card you play in a meld adds gold based on its value:
-
-        - 2–9 = **5 gold**
-        - 10, J, Q, K = **10 gold**
-        - Ace = **15 gold**`,
+            image: "/images/tutorial3.png",
+            text: `What do I do if I don't have a meld in my hand?
+            If you don't have a valid meld yet, simply discard a card by dragging
+            an unwanted card to the discard zone, and you will be dealt a new card.
+            
+            However, be strategic which cards you discard, as you may miss out on a 
+            high scoring meld if you discard valuable cards, think before discarding!`,
         },
         {
-            //image: "/images/tutorial-multipliers.png",
-            text: `Your meld size determines your gold multiplier:
-
-        - Pair = x2
-        - 3 of a Kind = x3
-        - 4 of a Kind, 2 pair = x4
-        - Quintet (Straight, Flush, Royal Flush)= x5`,
-        },
-        {
-            //image: "/images/tutorial-boost.png",
-            text: `After a meld, you can **boost** your gold — or play it safe.
-
-        Wager gold and pick 1 of 5 facedown cards. Results:
+            image: "/images/tutorial4.png",
+            text: `After you successfully play a meld for some gold, you will then
+            have the option to boost the gold you just crafted.
+            
+            Enter an amount of gold you want to wager, and pick 1 of 5 facedown cards.
 
         - 🃏 Joker = lose your bet
         - ♣️ Club = break even
         - ♥️ Heart = 2x
         - ♦️ Diamond = 5x
-        - ♠️ Spade = 10x`,
+        - ♠️ Spade = 10x
+        
+        If you want to play it safe, the boosting wager is optional.
+        If you're feeling lucky go all in, but be careful for the Joker!`,
         },
         {
-            //image: "/images/tutorial-discard.png",
-            text: `Need better cards? Discard any card and draw a new one.
+            image: "/images/tutorial5.png",
+            text: `Now let's talk about how much gold you earn when you meld cards.
+            
+            Each card you play has a base gold value:
 
-        Be strategic — smart discards lead to powerful melds!`,
-        },
-        {
-            //image: "/images/tutorial-end-round.png",
-            text: `After each meld:
-
-        - Unplayed cards return to the deck
-        - You draw a new hand
-        - Keep melding until the deck runs out!
-
-        🏆 Try to score the most gold!`,
-        },
+        - 2–9 = 5 gold
+        - 10, J, Q, K = 10 gold
+        - Ace = 15 gold
+        
+        The base value is then multiplied by the amount of cards melded at once:
+        - 2 card melds = 2X gold
+        - 3 card melds = 3X gold
+        - 4 card melds = 4X gold
+        - Quintets = 5X gold`
+        
+        ,
+        }
+        
     ];
 
     const [stepIndex, setStepIndex] = useState(0);
@@ -96,7 +108,7 @@ const TutorialPage = () => {
 
     return (
         <div style={{ maxWidth: "600px", margin: "auto", textAlign: "center" }}>
-            <h2>Quintetra Tutorial</h2>
+            <h2>How to Play</h2>
             <img
                 src={image}
                 alt={`Step ${stepIndex + 1}`}
