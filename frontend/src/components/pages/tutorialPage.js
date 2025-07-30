@@ -5,25 +5,24 @@ const TutorialPage = () => {
     const tutorialSteps = [
         {
             image: "/images/tutorial1.png",
-            text: `Welcome to Quintetre — a fast-paced card game where the goal is simple: craft as much gold as possible by melding your best cards!
-
-        A meld is when you play multiple cards together in a set — like a pair, three-of-a-kind, or a straight. The better the meld, the more gold you earn!
-
+            text: `Welcome to Quintétre — a fast-paced card game where the goal is simple: craft as much gold as possible by melding your best cards.
+                
+            You can also try your luck with betting to earn even more gold!
         Let’s break it down step-by-step.`,
         },
         {
             image: "/images/tutorial2.png",
-            text: `In Quintetre, you craft gold by "melding" sets of cards together.
+            text: `In Quintétre, you craft gold by "melding" sets of cards together.
         What is a meld?
         A meld is a set 2, 3, 4, or 5 cards. 
         Valid melds include:
-            2 card meld:  Pair. (2 cards of same face value) 
-            3 card meld:  3 of a kind. (3 cards of same face value)
-            4 card melds: 2 pair, 4 of a kind.
-            5 card melds (Quintets): Full house (pair and 3 of a kind)
+            2 cards:  Pair. (2 cards of same face value) 
+            3 cards:  3 of a kind. (3 cards of same face value)
+            4 cards: 2 pair, 4 of a kind.
+            5 cards (Quintets): Full house (pair and 3 of a kind)
             Flush (all cards same suit), 
-            straight (all cards ascending face value),
-            straight flush (all cards ascending value AND same face value).
+            Straight (all cards ascending face value),
+            Straight flush (all cards ascending value AND same face value).
             Royal flush (straight flush of 10, J, Q, K, A.)
             You might be familiar with these combinations if you've played poker.
             
@@ -44,7 +43,7 @@ const TutorialPage = () => {
             text: `After you successfully play a meld for some gold, you will then
             have the option to boost the gold you just crafted.
             
-            Enter an amount of gold you want to wager, and pick 1 of 5 facedown cards.
+            Enter an amount of gold you want to wager, and pick 1 of the 5 facedown cards.
 
         - 🃏 Joker = lose your bet
         - ♣️ Club = break even
@@ -69,7 +68,7 @@ const TutorialPage = () => {
         - 2 card melds = 2X gold
         - 3 card melds = 3X gold
         - 4 card melds = 4X gold
-        - Quintets = 5X gold`
+        - Quintets = 5X gold `
         
         ,
         }
