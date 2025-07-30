@@ -3,6 +3,7 @@ var hand = [];
 var playedCard = [];
 var bonusDeck = [];
 var bonusHand = [];
+var currentPoints = 0;
 var points = 0;
 
 const cards = document.querySelectorAll('.card');
@@ -38,11 +39,11 @@ window.gameState.getPoints = () => points;
 window.onload = function () {
     buildDeck();
     shuffleDeck();
-    dealCards();
     startingPos();
     initializeDragDropEvents();
     updateButtonStates();
     console.log(deck);
+    dealAnimation(dealNewCards);
 }
 
 /* prevents user from leaving page in the middle of a game
@@ -173,9 +174,12 @@ discardZone.addEventListener("drop", (e) => {
 ////////////////////////////////////////////////////////////////
 scoreButton.addEventListener("click", () => {
 
-
-    bonus.style.display = 'grid';
+    currentPoints = points;
     const handResult = evaluateHand(playedCard);
+
+
+    if(playedCard.length >= 2 && handResult != null){
+    bonus.style.display = 'grid';
     totalScore.textContent = "Gold: " + points;
     wagerInput.value = 0;
     wagerInput.max = points;
@@ -187,6 +191,12 @@ scoreButton.addEventListener("click", () => {
     shuffleBonusDeck();
     dealBonusCards()
     console.log(bonusHand);
+    }else{
+        resetCards();
+        clearDrops();
+        points = currentPoints;
+    }
+
 });
 
 resetButton.addEventListener("click", () => {
