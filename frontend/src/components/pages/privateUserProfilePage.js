@@ -8,6 +8,7 @@ const PrivateUserProfile = () => {
   const { user, setUser } = useContext(UserContext);
   const [highScore, setHighScore] = useState(null);
   const [gold, setGold] = useState(null);
+  const [level, setLevel] = useState(null);
   const navigate = useNavigate();
 
 
@@ -53,6 +54,19 @@ const PrivateUserProfile = () => {
           setGold(data.gold);
         })
         .catch(error => console.error("Error fetching gold:", error));
+
+        fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/level/${userInfo.username}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("Fetched level data:", data);
+          setLevel(data.level);
+        })
+        .catch(error => console.error("Error fetching level:", error));
     }
 
   }, []);
@@ -107,6 +121,11 @@ const PrivateUserProfile = () => {
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
         {/* Profile Username */}
         <h1 className="text-3xl font-semibold text-center mb-6">{user.username}</h1>
+
+        {/* Level Section */}
+        <h2 className="text-xl text-center font-semibold mb-4">
+          Level: {level}
+        </h2>
 
         {/* High Score Section */}
         <h2 className="text-xl text-center font-semibold mb-4">
