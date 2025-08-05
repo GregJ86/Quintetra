@@ -5,6 +5,7 @@ var bonusDeck = [];
 var bonusHand = [];
 var currentPoints = 0;
 var points = 0;
+var wagerReady = false;
 
 const cards = document.querySelectorAll('.card');
 const dropZones = document.querySelectorAll('.dropZone');
@@ -222,8 +223,25 @@ bonusButton.addEventListener("click", () => {
 
 wagerButton.addEventListener("click", () => {
 
+    const wagerAmount = parseInt(wagerInput.value, 10);
+
+    if (isNaN(wagerAmount) || wagerAmount <= 0 || wagerAmount > points) {
+                    alert("Invalid wager: You cannot wager more than your available gold.");
+                    wagerReady = false;
+                    return;
+        }
+
+    wagerReady = true;
+
+    console.log(wagerAmount);
+    console.log(points);
+
+
     bonusZones.forEach(bonusZone => {
-        bonusZone.addEventListener("click", () => {
+        bonusZone.addEventListener('click', () => {
+
+            if (!wagerReady) return;
+            
 
             for (let i = 0; i < bonusHand.length; i++) {
                 if (bonusZone.id == "bonus" + i) {
@@ -238,34 +256,38 @@ wagerButton.addEventListener("click", () => {
                     document.getElementById("bonus" + i).appendChild(bonusImg);
                     bonusHand = [];
 
-                    const wagerAmount = parseInt(wagerInput.value, 10);
-                    console.log(wagerAmount)
+                    const currentWagerAmount = parseInt(wagerInput.value, 10);
+                    console.log(currentWagerAmount);
 
-                    console.log(points)
-
+                    
                     switch (bonus) {
                         case "Z-1":
-                            points = points + (10 * wagerAmount);
+                            points = points + (10 * currentWagerAmount);
                             break;
                         case "Z-2":
-                            points = points + (5 * wagerAmount);
+                            points = points + (5 * currentWagerAmount);
                             break;
                         case "Z-3":
-                            points = points + (2 * wagerAmount);
+                            points = points + (2 * currentWagerAmount);
                             break;
                         case "Z-4":
                             points = points;
                             break;
                         case "Z-5":
-                            points = points - wagerAmount;
+                            points = points - currentWagerAmount;
                             break;
                     }
+
+                    console.log(points);
+
+                    wagerReady = false;
 
                 }
 
             }
 
         })
+        
     })
 
 });
