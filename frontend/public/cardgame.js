@@ -92,7 +92,7 @@ function initializeDragDropEvents() {
             if (!cardSlot) return;
 
             const cardImage = cardSlot.querySelector("img");
-            if (cardImage) {
+            if (!dropZone.querySelector('img')) {
 
                 const cardValue = cardImage.dataset.handValue;
 
