@@ -7,6 +7,7 @@ const PrivateUserProfile = () => {
   const [show, setShow] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const [highScore, setHighScore] = useState(null);
+  const [gold, setGold] = useState(null);
   const navigate = useNavigate();
 
 
@@ -39,6 +40,19 @@ const PrivateUserProfile = () => {
           setHighScore(data.highScore);
         })
         .catch(error => console.error("Error fetching high score:", error));
+
+        fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/gold/${userInfo.username}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log("Fetched gold data:", data);
+          setGold(data.gold);
+        })
+        .catch(error => console.error("Error fetching gold:", error));
     }
 
   }, []);
@@ -97,6 +111,11 @@ const PrivateUserProfile = () => {
         {/* High Score Section */}
         <h2 className="text-xl text-center font-semibold mb-4">
           High Score: {highScore}
+        </h2>
+
+        {/* Gold Section */}
+        <h2 className="text-xl text-center font-semibold mb-4">
+          Gold: {gold}
         </h2>
 
         

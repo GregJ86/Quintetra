@@ -62,3 +62,7 @@ Content-Type: application/json
 {
   "newHighScore": 150
 }
+
+###
+GET http://localhost:8081/user/gold/gregoryyy86
+Content-Type: application/json
