@@ -19,7 +19,7 @@ router.put("/gold/:username", async (req, res) => {
 
    
    
-      user.gold = newGold;
+      user.gold += newGold;
       await user.save();
       return res.json({ message: "Gold updated", gold: user.gold });
     

@@ -1,40 +1,71 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import './cardgame.css';
-import getUserInfo from "../../utilities/decodeJwt";  
+import getUserInfo from "../../utilities/decodeJwt";
 
-const handleEndGameClick = async () => {
-  const currentPoints = window.gameState.getPoints() ?? 0; 
-  console.log("Current points at end game:", currentPoints);
 
-  const userInfo = getUserInfo();
-  if (!userInfo || !userInfo.username) {
-    alert("You must be logged in to save your high score.");
-    return;
-  }
 
-  try {
-    const response = await fetch(
-      `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/highscore/${userInfo.username}`,
-      {
-        method: "PUT",  
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          newHighScore: currentPoints,  
-        }),
-      }
-    );
-
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-
-    const data = await response.json();
-    console.log(`High score: ${data.highScore}`);
-  } catch (err) {
-    console.error("Failed to update high score:", err);
-    alert("Error updating high score. Please try again.");
-  }
-};
 
 const CardGame = () => {
+
+  const navigate = useNavigate();
+
+  const handleEndGameClick = async () => {
+
+    const currentPoints = window.gameState.getPoints() ?? 0;
+    console.log("Current points at end game:", currentPoints);
+
+    const userInfo = getUserInfo();
+    if (!userInfo || !userInfo.username) {
+      alert("You must be logged in to save your high score.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/highscore/${userInfo.username}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            newHighScore: currentPoints,
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+      const data = await response.json();
+      console.log(`High score: ${data.highScore}`);
+    } catch (err) {
+      console.error("Failed to update high score:", err);
+      alert("Error updating high score. Please try again.");
+    }
+
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/gold/${userInfo.username}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            newGold: currentPoints,
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+      const data = await response.json();
+      console.log(`Gold: ${data.gold}`);
+    } catch (err) {
+      console.error("Failed to update gold:", err);
+      alert("Error updating gold. Please try again.");
+    }
+    navigate('/privateUserProfile');
+
+  };
+
   useEffect(() => {
     // Dynamically import your scripts after the component mounts
     const loadScripts = () => {
@@ -82,17 +113,17 @@ const CardGame = () => {
             </div>
           </div>
 
-          <div className = "newGameWindow">
+          <div className="newGameWindow">
             <p>Would you like to <br />start a new game?</p>
-            <div className = "restartButtons">
+            <div className="restartButtons">
               <button id="ngStartButton">Yes</button>
               <button id="ngCancelButton">No</button>
             </div>
           </div>
 
-          <div className = "quitGameWindow">
+          <div className="quitGameWindow">
             <p>Are you sure that<br />you want to quit?</p>
-            <div className = "restartButtons">
+            <div className="restartButtons">
               <button id="quitConfirmButton" onClick={handleEndGameClick}>Yes</button>
               <button id="quitCancelButton">No</button>
             </div>
@@ -109,8 +140,8 @@ const CardGame = () => {
               ))}
               <div id="score">Gold:</div>
               <div id="cardsLeft"></div>
-              
-              
+
+
             </div>
           </div>
 
