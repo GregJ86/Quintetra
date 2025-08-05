@@ -18,6 +18,14 @@ const newUserSchema = new mongoose.Schema(
       type: String,
       min : 8
     },
+    level: {
+      type: Number,
+      default: 1,
+    },
+    gold: {
+      type: Number,
+      default: 0,
+    },
     highScore: {
       type: Number,
       default: 0,
