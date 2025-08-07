@@ -21,6 +21,28 @@ const CardGame = () => {
       return;
     }
 
+    let prevGold = 0;
+    try {
+      const goldGetResponse = await fetch(
+        `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/gold/${userInfo.username}`,
+        {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      if (!goldGetResponse.ok) throw new Error(`GET gold failed: ${goldGetResponse.status}`);
+
+      const goldGetData = await goldGetResponse.json();
+      prevGold = goldGetData.gold;
+      console.log("Previous total gold:", prevGold);
+    } catch (err) {
+      console.error("Failed to fetch previous gold:", err);
+      alert("Error retrieving current gold. Please try again.");
+      return;
+    }
+
+    //updating high score at the end of the game
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/highscore/${userInfo.username}`,
@@ -42,6 +64,7 @@ const CardGame = () => {
       alert("Error updating high score. Please try again.");
     }
 
+    //updating total gold won after end of the game
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/gold/${userInfo.username}`,
@@ -58,10 +81,53 @@ const CardGame = () => {
 
       const data = await response.json();
       console.log(`Gold: ${data.gold}`);
+
+      //update player level at end of the game
+      const newGold = data.gold;
+
+      console.log(`Previous gold: ${prevGold}`);
+      console.log(`New gold: ${newGold}`);
+
+      const prevLevelCheck = Math.floor(prevGold / 5000);
+      const newLevelCheck = Math.floor(newGold / 5000);
+      const levelIncrease = newLevelCheck - prevLevelCheck;
+
+      console.log(`Level increase: ${levelIncrease}`);
+
+
+
+
+      if (levelIncrease > 0) {
+        try {
+          const response = await fetch(
+            `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/level/${userInfo.username}`,
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                newLevel: levelIncrease,
+              }),
+            }
+          );
+
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+          const data = await response.json();
+          console.log(`New level: ${data.level}`);
+
+        } catch (err) {
+          console.error("Failed to update level:", err);
+          alert("Error updating level. Please try again.");
+        }
+
+
+      }
     } catch (err) {
       console.error("Failed to update gold:", err);
       alert("Error updating gold. Please try again.");
     }
+
+    //return to home page
     navigate('/privateUserProfile');
 
   };

@@ -19,7 +19,7 @@ router.put("/level/:username", async (req, res) => {
 
    
    
-      user.level = newLevel;
+      user.level += newLevel;
       await user.save();
       return res.json({ message: "Level updated", level: user.level });
     

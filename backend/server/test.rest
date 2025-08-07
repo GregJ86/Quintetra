@@ -72,7 +72,7 @@ PUT http://localhost:8081/user/gold/gregoryyy86
 Content-Type: application/json
 
 {
-  "newGold": 3000
+  "newGold": -5050
 }
 
 ###
