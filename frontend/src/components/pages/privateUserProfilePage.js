@@ -75,7 +75,7 @@ const PrivateUserProfile = () => {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
         <h2 className="text-2xl font-semibold mb-4 text-center">
-          Welcome to Quintetra!
+          Welcome to Quintétre!
         </h2>
         <p className="mb-6 text-center max-w-md">
           Sign up or log in to view your game progress!
@@ -109,6 +109,15 @@ const PrivateUserProfile = () => {
               className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
             >
               Play
+            </button>
+          </div>
+          {/* Tutorial Link */}
+          <div className="w-full">
+            <button
+              onClick={() => (window.location.href = "/tutorialPage")}
+              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+            >
+              Tutorial
             </button>
           </div>
         </div>

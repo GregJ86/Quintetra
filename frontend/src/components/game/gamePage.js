@@ -173,9 +173,9 @@ const CardGame = () => {
             </div>
 
             <div className="bonusButtons">
-              <button id="bonusButton">Exit</button>
+              <button id="bonusButton">Back to Game</button>
               <input type="number" id="wager" min="0" />
-              <button id="wagerButton">Wager</button>
+              <button id="wagerButton">Place Bet</button>
             </div>
           </div>
 
