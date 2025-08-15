@@ -39,6 +39,7 @@ export default function Navbar() {
         <Nav className="me-auto">
           <Nav.Link href="/privateUserProfile">Profile</Nav.Link>
           <Nav.Link href="/tutorialPage">Tutorial</Nav.Link>
+          <Nav.Link href="/topScoresPage">Leaderboard</Nav.Link>
           <Nav.Link href="/gamePage">New Game</Nav.Link>
         </Nav>
 

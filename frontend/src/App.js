@@ -14,6 +14,7 @@ import Login from "./components/pages/loginPage";
 import Signup from "./components/pages/registerPage";
 import Tutorial from "./components/pages/tutorialPage";
 import PrivateUserProfile from "./components/pages/privateUserProfilePage";
+import TopScores from "./components/pages/topScoresPage";
 import { createContext, useState, useEffect } from "react";
 import getUserInfo from "./utilities/decodeJwt";
 
@@ -39,6 +40,8 @@ const App = () => {
           <Route path="/privateUserProfile" element={<PrivateUserProfile />} />
           <Route exact path = "/gamePage" element ={<GamePage/>} />
           <Route exact path = "/tutorialPage" element ={<Tutorial/>} />
+          <Route exact path = "/topScoresPage" element ={<TopScores/>} />
+
 
 
 
