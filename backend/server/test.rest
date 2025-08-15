@@ -56,11 +56,11 @@ GET http://localhost:8081/user/highscore/ggregg86
 Content-Type: application/json 
 
 ### 
-PUT http://localhost:8081/user/highscore/ggregg86
+PUT http://localhost:8081/user/highscore/AceOfSpades
 Content-Type: application/json
 
 {
-  "newHighScore": 150
+  "newHighScore": 10000
 }
 
 ###
@@ -86,3 +86,9 @@ Content-Type: application/json
 {
   "newLevel": 2
 }
+
+###
+GET http://localhost:8081/user/topScores
+Content-Type: application/json 
+
+

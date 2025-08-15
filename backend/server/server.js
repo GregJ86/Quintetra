@@ -14,6 +14,8 @@ const getGoldRoute = require('./routes/userGetGold')
 const putGoldRoute = require('./routes/userPutGold')
 const getLevelRoute = require('./routes/userGetLevel')
 const putLevelRoute = require('./routes/userPutLevel')
+const getTopScoresRoute = require('./routes/userGetTopScores')
+
 
 
 
@@ -36,6 +38,7 @@ app.use('/user', getGoldRoute)
 app.use('/user', putGoldRoute)
 app.use('/user', getLevelRoute)
 app.use('/user', putLevelRoute)
+app.use('/user', getTopScoresRoute)
 
 
 
