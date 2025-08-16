@@ -91,4 +91,12 @@ Content-Type: application/json
 GET http://localhost:8081/user/icon/KingClubs
 Content-Type: application/json 
 
+### 
+PUT http://localhost:8081/user/icon/KingClubs
+Content-Type: application/json
+
+{
+  "newIcon": "king.png"
+}
+
 

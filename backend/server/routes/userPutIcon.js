@@ -2,23 +2,25 @@ const express = require("express");
 const router = express.Router();
 const newUserModel = require('../models/userModel')
 
-router.put("/user/:id/icon", async (req, res) => {
+router.put("/icon/:username", async (req, res) => {
     try {
-        const { icon } = req.body;
+        const { username } = req.params;
+        const { newIcon } = req.body;
 
 
         // Find user
-        const user = await newUserModel.findByIdAndUpdate(req.params.id,
-            { icon },
-            { new: true });
+            const user = await newUserModel.findOne({ username });
+        
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
+        user.icon = newIcon;
+        await user.save();
 
 
 
 
-        return res.json(user);
+        return res.json( { message: "Icon updated", icon: user.icon});
 
     } catch (error) {
         console.error(error);
