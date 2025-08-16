@@ -9,6 +9,7 @@ const PrivateUserProfile = () => {
   const [highScore, setHighScore] = useState(null);
   const [gold, setGold] = useState(null);
   const [level, setLevel] = useState(null);
+  const [icon, setIcon] = useState(null);
   const navigate = useNavigate();
 
 
@@ -42,7 +43,7 @@ const PrivateUserProfile = () => {
         })
         .catch(error => console.error("Error fetching high score:", error));
 
-        fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/gold/${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/gold/${userInfo.username}`)
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -55,7 +56,7 @@ const PrivateUserProfile = () => {
         })
         .catch(error => console.error("Error fetching gold:", error));
 
-        fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/level/${userInfo.username}`)
+      fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/level/${userInfo.username}`)
         .then(response => {
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -68,6 +69,19 @@ const PrivateUserProfile = () => {
         })
         .catch(error => console.error("Error fetching level:", error));
     }
+
+    fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/icon/${userInfo.username}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Fetched icon data:", data);
+        setIcon(data.icon);
+      })
+      .catch(error => console.error("Error fetching icon:", error));
 
   }, []);
 
@@ -126,8 +140,17 @@ const PrivateUserProfile = () => {
   }
 
   return (
+
     <div className="bg-green-200 flex justify-center items-center min-h-screen bg-gray-100">
+
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
+
+        {/* Player Icon */}
+        <img
+          src={icon}
+          alt="User Icon"
+          className="mx-auto mb-4 w-24 h-24 rounded-full border-4 border-green-500"
+        />
         {/* Profile Username */}
         <h1 className="text-3xl font-semibold text-center mb-6">{user.username}</h1>
 
@@ -146,8 +169,8 @@ const PrivateUserProfile = () => {
           Gold: {gold}
         </h2>
 
-        
-        
+
+
 
         {/* Modal */}
         {show && (

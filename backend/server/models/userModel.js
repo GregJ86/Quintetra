@@ -16,7 +16,7 @@ const newUserSchema = new mongoose.Schema(
     password: {
       required: true,
       type: String,
-      min : 8
+      min: 8
     },
     level: {
       type: Number,
@@ -29,6 +29,10 @@ const newUserSchema = new mongoose.Schema(
     highScore: {
       type: Number,
       default: 0,
+    },
+    icon: {
+      type: String,
+      default: "ace.png",
     },
     date: {
       type: Date,
