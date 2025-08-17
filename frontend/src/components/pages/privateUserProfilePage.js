@@ -10,6 +10,8 @@ const PrivateUserProfile = () => {
   const [gold, setGold] = useState(null);
   const [level, setLevel] = useState(null);
   const [icon, setIcon] = useState(null);
+
+
   const navigate = useNavigate();
 
 
@@ -19,6 +21,36 @@ const PrivateUserProfile = () => {
     setUser(null);
     navigate("/");
   };
+
+  const [showIconModal, setShowIconModal] = useState(false);
+  const [selectedIcon, setSelectedIcon] = useState(null);
+
+  const iconOptions = ["jack.png", "king.png", "queen.png"];
+
+  const handleSetIcon = async () => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BACKEND_SERVER_URI}/user/icon/${user.username}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ newIcon: selectedIcon }),
+        }
+      );
+
+      if (!response.ok) throw new Error("Failed to update icon");
+
+      const data = await response.json();
+
+      setUser(prev => ({ ...prev, icon: data.icon }));
+      setIcon(data.icon);
+      setShowIconModal(false);
+    } catch (error) {
+      console.error("Error updating icon:", error);
+    }
+  };
+
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -146,11 +178,21 @@ const PrivateUserProfile = () => {
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
 
         {/* Player Icon */}
+
         <img
           src={icon}
           alt="User Icon"
           className="mx-auto mb-4 w-24 h-24 rounded-full border-4 border-green-500"
         />
+
+        {/* Edit Icon */}
+        <button
+          onClick={() => setShowIconModal(true)}
+          className="block mx-auto mb-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+        >
+          Edit Icon
+        </button>
+
         {/* Profile Username */}
         <h1 className="text-3xl font-semibold text-center mb-6">{user.username}</h1>
 
@@ -190,6 +232,40 @@ const PrivateUserProfile = () => {
                   onClick={handleLogout}
                 >
                   Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showIconModal && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+              <h2 className="text-xl font-semibold mb-4 text-center">Choose Your Icon</h2>
+              <div className="flex flex-wrap justify-center gap-4 mb-4">
+                {iconOptions.map((icon) => (
+                  <img
+                    key={icon}
+                    src={icon}
+                    alt={icon}
+                    onClick={() => setSelectedIcon(icon)}
+                    className={`w-16 h-16 rounded-full cursor-pointer border-4 ${selectedIcon === icon ? "border-blue-500" : "border-transparent"
+                      } hover:border-blue-300 transition duration-200`}
+                  />
+                ))}
+              </div>
+              <div className="flex justify-around">
+                <button
+                  onClick={() => setShowIconModal(false)}
+                  className="bg-gray-300 px-4 py-2 rounded hover:bg-gray-400"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSetIcon}
+                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                >
+                  Set Icon
                 </button>
               </div>
             </div>
