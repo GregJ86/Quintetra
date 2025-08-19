@@ -8,6 +8,7 @@ import './index.css';
 
 import GamePage from "./components/game/gamePage";
 import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 import LandingPage from "./components/pages/landingPage";
 import HomePage from "./components/pages/homePage";
 import Login from "./components/pages/loginPage";
@@ -49,6 +50,7 @@ const App = () => {
 
         </Routes>
       </UserContext.Provider>
+      <Footer/>
     </>
   );
 };
