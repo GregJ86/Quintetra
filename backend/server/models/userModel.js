@@ -32,7 +32,7 @@ const newUserSchema = new mongoose.Schema(
     },
     icon: {
       type: String,
-      default: "ace.png",
+      default: "default.png",
     },
     date: {
       type: Date,
