@@ -321,7 +321,7 @@ div.card:hover{
     border-radius: 5px;
 }
 
-#wagerButton:hover{
+#wagerButton:not(:disabled):hover{
     border: solid yellow;
     border-radius: 5px;
 }

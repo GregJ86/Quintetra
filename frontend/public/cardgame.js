@@ -221,6 +221,8 @@ bonusButton.addEventListener("click", () => {
 
 });
 
+wagerInput.addEventListener('input', updateButtonStates);
+
 wagerButton.addEventListener("click", () => {
 
     const wagerAmount = parseInt(wagerInput.value, 10);
@@ -230,7 +232,7 @@ wagerButton.addEventListener("click", () => {
                     wagerReady = false;
                     return;
         }
-
+    wagerButton.disabled = true;
     wagerReady = true;
 
     console.log(wagerAmount);
@@ -241,6 +243,7 @@ wagerButton.addEventListener("click", () => {
         bonusZone.addEventListener('click', () => {
 
             if (!wagerReady) return;
+            
             
 
             for (let i = 0; i < bonusHand.length; i++) {
@@ -536,9 +539,14 @@ function replaceCard() {
 function updateButtonStates() {
     
     const hasCardInDropZone = Array.from(dropZones).some(dropZone => dropZone.querySelector('img'));
+    const wagerAmount = parseInt(wagerInput.value, 10);
+    const isValidWager = !isNaN(wagerAmount) && wagerAmount > 0 && wagerAmount <= points;
+
+
 
     scoreButton.disabled = !hasCardInDropZone;
     resetButton.disabled = !hasCardInDropZone;
+    wagerButton.disabled = !isValidWager;
 }
 
 
