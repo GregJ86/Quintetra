@@ -121,7 +121,7 @@ const PrivateUserProfile = () => {
   if (!user || !user.username) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 p-6">
-        <h2 className="text-2xl font-semibold mb-4 text-center">
+        <h2 id = "title" className="font-semibold mb-3 text-center">
           Welcome to Quintétre!
         </h2>
         <p className="mb-6 text-center max-w-md">
