@@ -47,13 +47,13 @@ window.onload = function () {
     dealAnimation(dealNewCards);
 }
 
-/* prevents user from leaving page in the middle of a game
+
 
 window.addEventListener('beforeunload', function (e) {
   e.preventDefault();
 });
 
-leave as a comment during testing*/
+
 
 ///////////////////////////////////////////////////////////
 function initializeDragDropEvents() {
