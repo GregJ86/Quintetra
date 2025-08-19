@@ -100,7 +100,7 @@ const PrivateUserProfile = () => {
           setLevel(data.level);
         })
         .catch(error => console.error("Error fetching level:", error));
-    }
+    
 
     fetch(`${process.env.REACT_APP_BACKEND_SERVER_URI}/user/icon/${userInfo.username}`)
       .then(response => {
@@ -114,6 +114,7 @@ const PrivateUserProfile = () => {
         setIcon(data.icon);
       })
       .catch(error => console.error("Error fetching icon:", error));
+    }
 
   }, []);
 
