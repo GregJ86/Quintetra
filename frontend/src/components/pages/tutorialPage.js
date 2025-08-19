@@ -94,12 +94,16 @@ const TutorialPage = () => {
 
     if (tutorialComplete) {
         return (
-            <div style={{ textAlign: "center" }}>
-                <h2>You're ready to play!</h2>
-                <button onClick={() => (window.location.href = "/gamePage")}>
-                    Start Game
-                </button>
-            </div>
+            <div className="h-screen flex flex-col justify-center items-center text-center">
+    <h2 className="mb-4 text-2xl font-semibold">You're ready to play!</h2>
+    <button
+      onClick={() => (window.location.href = "/gamePage")}
+      className="text-2xl bg-green-500 text-white hover:bg-green-700 px-4 py-2 rounded-md transition"
+    >
+      Start Game
+    </button>
+  </div>
+
         );
     }
 
@@ -122,11 +126,11 @@ const TutorialPage = () => {
                 dangerouslySetInnerHTML={{ __html: text.replace(/\n/g, "<br />") }}
             />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <button onClick={goPrev} disabled={stepIndex === 0}>
+                <button onClick={goPrev} disabled={stepIndex === 0} className="flex justify-center items-center text-xl bg-green-500 text-white hover:bg-green-700 px-4 py-2 rounded-md">
                     Previous
                 </button>
-                <button onClick={goNext}>
-                    {stepIndex === tutorialSteps.length - 1 ? "Finish" : "Next"}
+                <button onClick={goNext} className="flex justify-center items-center text-2xl bg-green-500 text-white hover:bg-green-700 px-4 py-2 rounded-md">
+                    {stepIndex === tutorialSteps.length - 1 ? "Finish" : "Next"} 
                 </button>
             </div>
         </div>

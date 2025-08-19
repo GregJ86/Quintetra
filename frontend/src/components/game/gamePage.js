@@ -17,8 +17,7 @@ const CardGame = () => {
 
     const userInfo = getUserInfo();
     if (!userInfo || !userInfo.username) {
-      alert("You must be logged in to save your high score.");
-      return;
+      navigate('/privateUserProfile');
     }
 
     let prevGold = 0;
@@ -38,7 +37,6 @@ const CardGame = () => {
       console.log("Previous total gold:", prevGold);
     } catch (err) {
       console.error("Failed to fetch previous gold:", err);
-      alert("Error retrieving current gold. Please try again.");
       return;
     }
 

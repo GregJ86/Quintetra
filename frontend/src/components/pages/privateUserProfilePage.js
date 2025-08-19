@@ -134,7 +134,7 @@ const PrivateUserProfile = () => {
           <div className="mb-4 w-full">
             <button
               onClick={() => navigate("/signup")}
-              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+              className="flex justify-center items-center text-2xl bg-green-500 text-white hover:bg-green-700 px-4 py-2 rounded-md"
             >
               Signup
             </button>
@@ -144,7 +144,7 @@ const PrivateUserProfile = () => {
           <div className="mb-4 w-full">
             <button
               onClick={() => navigate("/login")}
-              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+              className="flex justify-center items-center text-2xl bg-green-500 text-white hover:bg-green-700 px-4 py-2 rounded-md"
             >
               Login
             </button>
@@ -153,7 +153,7 @@ const PrivateUserProfile = () => {
           <div className="w-full">
             <button
               onClick={() => (window.location.href = "/gamePage")}
-              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+              className="flex justify-center items-center text-2xl bg-green-500 text-white hover:bg-green-700 px-4 py-2 rounded-md"
             >
               Play
             </button>
@@ -162,7 +162,7 @@ const PrivateUserProfile = () => {
           <div className="w-full">
             <button
               onClick={() => (window.location.href = "/tutorialPage")}
-              className="flex justify-center items-center text-2xl bg-blue-500 text-white hover:bg-blue-700 px-4 py-2 rounded-md"
+              className="flex justify-center items-center text-2xl bg-green-500 text-white hover:bg-green-700 px-4 py-2 rounded-md"
             >
               Tutorial
             </button>

@@ -15,6 +15,15 @@
     width: 925px;
 }
 
+#subtitle {
+    text-align: center;
+    font-family: "Papyrus";
+    font-size: 25px;
+    color: rgb(40, 131, 111);
+    font-style: italic;
+    width: 925px;
+}
+
 .window {
 
     display: flexbox;
