@@ -226,7 +226,7 @@ wagerButton.addEventListener("click", () => {
     const wagerAmount = parseInt(wagerInput.value, 10);
 
     if (isNaN(wagerAmount) || wagerAmount <= 0 || wagerAmount > points) {
-                    alert("Invalid wager: You cannot wager more than your available gold.");
+                   
                     wagerReady = false;
                     return;
         }
