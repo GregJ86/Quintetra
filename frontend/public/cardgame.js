@@ -126,52 +126,47 @@ discardZone.addEventListener("dragover", (e) => {
 discardZone.addEventListener("drop", (e) => {
     e.preventDefault();
 
-    if (deck.length > 0) {
-        const dropId = e.dataTransfer.getData("text/plain");
-        const drop = document.getElementById(dropId);
-        const cardSlot = drop;
+    if (deck.length === 0) return;
 
-        if (!cardSlot) return;
+    const dropId = e.dataTransfer.getData("text/plain");
+    const drop = document.getElementById(dropId);
+    const cardSlot = drop;
+    if (!cardSlot) return;
 
+    const cardImage = cardSlot.querySelector("img");
+    let cardIndex = -1;
 
-        const cardImage = cardSlot.querySelector("img");
-        if (cardImage) {
+    if (cardImage) {
+        const cardValue = cardImage.dataset.handValue;
+        cardIndex = hand.indexOf(cardValue);
 
-            const cardValue = cardImage.dataset.handValue;
-
-            const cardIndex = hand.indexOf(cardValue);
-
-            if (cardIndex !== -1) {
-                hand[cardIndex] = 'discarded';
-                console.log("Hand after discard (with dummy):", hand);
-            }
-
-            cardSlot.removeChild(cardImage);
+        if (cardIndex !== -1) {
+            hand[cardIndex] = 'discarded';
+            console.log("Hand after discard (with dummy):", hand);
         }
 
+        cardSlot.removeChild(cardImage);
+    }
+
+    if (cardIndex === -1) return;
+
+    const targetRect = cardSlot.getBoundingClientRect();
+    const targetPosition = { x: targetRect.left, y: targetRect.top };
+
+    dealAnimation(() => {
         const newCard = deck.pop();
         const newCardImg = document.createElement("img");
         newCardImg.src = `./cards/${newCard}.png`;
         newCardImg.dataset.handValue = newCard;
 
         cardSlot.appendChild(newCardImg);
+        hand[cardIndex] = newCard;
 
-        const cardIndex = hand.indexOf('discarded');
-        if (cardIndex !== -1) {
-            hand[cardIndex] = newCard;
-        }
-
-        cardsLeft.textContent = "Deck: " + deck.length
-
+        cardsLeft.textContent = "Deck: " + deck.length;
         console.log("Hand after new card dealt:", hand);
-       
-    } else {
-        
-    }
-
-
-
+    }, [targetPosition]);
 });
+
 ////////////////////////////////////////////////////////////////
 scoreButton.addEventListener("click", () => {
 
