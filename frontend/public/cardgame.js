@@ -329,7 +329,7 @@ quitGameCancelButton.addEventListener("click", () => {
 function resetBonusCardImg() {
     bonusZones.forEach(bonusZone => {
         let bonusImg = document.createElement("img");
-        bonusImg.src = "./cards/back.png";
+        bonusImg.src = "./cards/BACK.png";
         bonusZone.innerHTML = "";
         bonusZone.appendChild(bonusImg);
 
